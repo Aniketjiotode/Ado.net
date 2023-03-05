@@ -29,5 +29,21 @@ namespace PayRoll_Service
                 }
             }
         }
+        public void UpdateSalary()
+        {
+            Console.WriteLine("Enter the Employee Name:");
+            string name= (Console.ReadLine());
+            Console.WriteLine("Enter update Salary");
+            int s=int.Parse(Console.ReadLine());
+            var flag = repo.UpdateEmployeeSalary(name,s);
+            if (flag)
+            {
+                Console.WriteLine("Employee Salary Update Successfully..");
+            }
+            else
+            {
+                Console.WriteLine("Failed While Updating Employee Salary");
+            }
+        }
     }
 }

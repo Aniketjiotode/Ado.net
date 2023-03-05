@@ -32,6 +32,17 @@ namespace PayRoll_Service
             connection.Close();
             return employees;
         }
-        
+        public bool UpdateEmployeeSalary(string name,int salary)
+        {
+            var Sql = @$"update empolyee_Payroll set Salary={salary} where name='{name}'";
+
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(Sql, con);
+            con.Open();
+            int output = sqlCommand.ExecuteNonQuery();
+            con.Close();
+            return output > 0;
+        }
+
     }
 }
