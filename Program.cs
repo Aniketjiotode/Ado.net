@@ -8,7 +8,7 @@ namespace PayRoll_Service
             {
                 while (true)
                 {
-                    Console.WriteLine("Enter 1 to get all Employees\nEnter 2 to update salary\nEnter 3 to get data in range\nEnter 4 to get Total Salary by gender\nEnter 5 to insert new Employee data ");
+                    Console.WriteLine("Enter 1 to get all Employees\nEnter 2 to update salary\nEnter 3 to get data in range\nEnter 4 to get Total Salary by gender\nEnter 5 to insert new Employee data\nEnter 6 to delete Employee data ");
                     int input = int.Parse(Console.ReadLine());
                     EmployeeManager manager = new EmployeeManager(new SqlRepository());
                     switch (input)
@@ -18,6 +18,7 @@ namespace PayRoll_Service
                         case 3: manager.GetEmpolyeebyDate(); break;
                         case 4: manager.GetTotalSalaryByGender(); break;
                         case 5: manager.InsertData(); break;
+                        case 6: manager.Delete(); break;
                         default: Console.WriteLine("Invalid Entry"); break;
                     }
                 }
@@ -28,7 +29,7 @@ namespace PayRoll_Service
             public int Id { get; set; }
             public string EmployeeName { get; set; }
             public decimal Salary { get; set; }
-            public string Date { get; set; }
+            public DateTime Date { get; set; }
             public string Gender { get; set; }
             public override string ToString()
             {

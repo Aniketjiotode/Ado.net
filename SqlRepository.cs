@@ -64,6 +64,36 @@ namespace PayRoll_Service
             connection.Close();
             return employees;
         }
-
+        public List<Employee> GetTotalSalarybygender(string g)
+        {
+            var Sql = @$"SELECT SUM(salary) AS Total_Empolyee_Salary FROM empolyee_payroll WHERE gender='M' GROUP BY gender";
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            SqlCommand command = new SqlCommand(Sql, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<Employee> employees = new List<Employee>();
+            while (reader.Read())
+            {
+                var employee = new Employee();
+                employee.Id = reader.GetInt32(0);
+                employee.EmployeeName = reader.GetString(1);
+                employee.Salary = reader.GetInt32(2);
+                employee.Date = reader.GetDateTime(3);
+                employee.Gender = reader.GetString(4);
+                employees.Add(employee);
+            }
+            connection.Close();
+            return employees;
+        }
+        public bool InsertEmployee(Employee employee)
+        {
+            var Sql = @$"insert into Employee(EmployeeName,Salary,Date,Gender) values('{employee.EmployeeName}',{employee.Salary}, '{employee.Date}',{employee.Gender})";
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(Sql, con);
+            con.Open();
+            int output = sqlCommand.ExecuteNonQuery();
+            con.Close();
+            return output > 0;
+        }
     }
 }
