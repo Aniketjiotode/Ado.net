@@ -45,5 +45,26 @@ namespace PayRoll_Service
                 Console.WriteLine("Failed While Updating Employee Salary");
             }
         }
+        public void GetEmpolyeebyDate()
+        {
+            Console.WriteLine("Enter the Range of Date(YYYY-MM-DD):");
+            Console.WriteLine("Enter the start date");
+            var r1=Console.ReadLine();   
+            Console.WriteLine("Enter the end date");
+            var r2=Console.ReadLine();
+            var employees = repo.GetEmpolyeeByDataRange(r1,r2);
+            if (employees.Count <= 0)
+            {
+                Console.WriteLine($"list is empty");
+            }
+            else
+            {
+                foreach (var item in employees)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            }
+        }
+        
     }
 }

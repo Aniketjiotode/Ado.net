@@ -8,13 +8,14 @@ namespace PayRoll_Service
             {
                 while (true)
                 {
-                    Console.WriteLine("Enter 1 to get all Employees\nEnter 2 to update salary");
+                    Console.WriteLine("Enter 1 to get all Employees\nEnter 2 to update salary\nEnter 3 to get data in range");
                     int input = int.Parse(Console.ReadLine());
                     EmployeeManager manager = new EmployeeManager(new SqlRepository());
                     switch (input)
                     {
                         case 1: manager.GetEmployees(); break;
                         case 2: manager.UpdateSalary(); break;
+                        case 3: manager.GetEmpolyeebyDate(); break;
                         default: Console.WriteLine("Invalid Entry"); break;
                     }
                 }

@@ -43,6 +43,27 @@ namespace PayRoll_Service
             con.Close();
             return output > 0;
         }
+        public List<Employee> GetEmpolyeeByDataRange(string r1,string r2)
+        {
+            var Sql = @$"SELECT * FROM empolyee_payroll WHERE start BETWEEN CAST('{r1}'AS DATE) AND CAST('{r2}' AS DATE)";
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            SqlCommand command = new SqlCommand(Sql, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<Employee> employees = new List<Employee>();
+            while (reader.Read())
+            {
+                var employee = new Employee();
+                employee.Id = reader.GetInt32(0);
+                employee.EmployeeName = reader.GetString(1);
+                employee.Salary = reader.GetInt32(2);
+                employee.Date = reader.GetDateTime(3);
+                employee.Gender = reader.GetString(4);
+                employees.Add(employee);
+            }
+            connection.Close();
+            return employees;
+        }
 
     }
 }
